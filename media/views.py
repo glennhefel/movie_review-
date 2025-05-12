@@ -71,7 +71,8 @@ def media_detail(request, pk):
         "media": media,
         "average_rating": average_rating,
         "reviews": reviews,
-    }
+        "user_reviewed": user_reviewed,
+    } 
     return render(request, "media/m_details.html", context)
 ##Kuro
 
@@ -161,16 +162,22 @@ def report_comment(request, comment_id):
             reason=reason,
             description=description
         )
-        #Probable problem
-        send_mail(
-            'New Comment Report',
-            f'A new comment has been reported by {request.user.username} for comment ID {comment.id}. Reason: {reason}.',
-            settings.DEFAULT_FROM_EMAIL,  
-            ['admin@brac.com'], 
-            fail_silently=False,
-        )
+        
         return JsonResponse({'message': 'Comment reported successfully.'})
     return redirect('media:homepage')
+
+def delete_review(request, review_id):
+       review = get_object_or_404(Rating, id=review_id)
+    
+   
+       if review.user != request.user:
+         raise Http404("You do not have permission to delete this review.")
+    
+   
+       review.delete()
+    
+    
+       return redirect("media:m_detail", pk=review.media.pk)
 
 
 

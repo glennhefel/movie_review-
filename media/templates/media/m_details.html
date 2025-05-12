@@ -19,10 +19,10 @@
         <!--Kuro_button-->
         {% if user_reviewed %}
         
-        <button class="btn btn-secondary" > Bruh </button>
+        <button id="addReviewBtn" class="btn btn-secondary" > Edit Review </button>
         {% else %}
         <button id="addReviewBtn" class="btn btn-outline-primary btn-sm mb-3 px-3 py-2 rounded">
-            Add a review... or edit review...
+            Add a review... 
           </button>
         
         {% endif %}
@@ -103,11 +103,15 @@
             {% if review.user == request.user %}
             <div>
                 <!-- Show Edit Button -->
-                <!-- <button id="addReviewBtn" class="btn btn-outline-primary btn-sm mb-3 px-3 py-2 rounded">Edit</button> -->
+                <!--button id="addReviewBtn" class="btn btn-outline-primary btn-sm mb-3 px-3 py-2 rounded">Edit</button> -->
             </div>
+              <form method="POST" action="{% url 'media:delete_review' review.id %}" class="d-flex">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-primary btn-sm mb-3 px-3 py-2 rounded ms-auto">X</button>
+                </form>
             {% endif %}
 
-            <!-- Abrar: Report Button (only for non-user and non-admin comments) -->
+            <!-- Abrar: Report Button (only for non-OP and non-admin comments) -->
             {% if review.user != request.user and not review.user.is_staff %}
                 <!-- Report Button -->
                 <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#reportModal{{ review.id }}">
