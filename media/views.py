@@ -152,8 +152,6 @@ class edit_review():
 def report_comment(request, comment_id):
     if request.method == 'POST':
         comment = get_object_or_404(Rating, id=comment_id)
-        if comment.user == request.user or comment.user.is_staff:
-            return JsonResponse({'error': 'You cannot report your own comment or admin\'s comment.'}, status=400)
         reason = request.POST.get('reason')
         description = request.POST.get('description','')
         CommentReport.objects.create(
@@ -162,8 +160,7 @@ def report_comment(request, comment_id):
             reason=reason,
             description=description
         )
-        
-        return JsonResponse({'message': 'Comment reported successfully.'})
+        return redirect('media:m_detail', pk=comment.media.pk)
     return redirect('media:homepage')
 
 def delete_review(request, review_id):

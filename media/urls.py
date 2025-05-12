@@ -25,6 +25,6 @@ urlpatterns = [
     path("media/vote/<int:rating_id>/<str:action>/", views.vote_review, name='vote_review'),
     path('signup/', views.signup, name='signup'),
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    path('report_comment/<int:comment_id>/', views.report_comment, name='report_comment'),
-    path('media/report/<int:review_id>/delete/', views.delete_review, name='delete_review'), 
+    path('report/<int:comment_id>/', views.report_comment, name='report_comment'),
+    path('media/t/<int:review_id>/delete/', views.delete_review, name='delete_review'), 
 ]

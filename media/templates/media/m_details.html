@@ -111,14 +111,14 @@
                 </form>
             {% endif %}
 
-            <!-- Abrar: Report Button (only for non-OP and non-admin comments) -->
+            <!--(only for non-OP and non-admin comments) -->
             {% if review.user != request.user and not review.user.is_staff %}
-                <!-- Report Button -->
+                <!-- report button -->
                 <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#reportModal{{ review.id }}">
                     Report
                 </button>
                 
-                <!-- Report Modal -->
+                <!-- report modal -->
                 <div class="modal fade" id="reportModal{{ review.id }}" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -149,7 +149,7 @@
                     </div>
                 </div>
             {% endif %}
-            <!-- Abrar end -->
+           
 
             {% if review.comment == "(This guy wrote nothing)" %}
                 <p style="color: grey; font-style: italic;">{{ review.comment }}</p>
