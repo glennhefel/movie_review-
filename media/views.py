@@ -18,7 +18,7 @@ from django.contrib.auth import login
 from django.shortcuts import render, redirect
 
 from .models import *
-from django.core.mail import send_mail  #Abrar
+
 
 # Create your views here.
 
