@@ -10,7 +10,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from django.http import JsonResponse, HttpResponseBadRequest #Kuro
+
 
 #for signup
 from django.contrib.auth.forms import UserCreationForm
@@ -106,9 +106,7 @@ def add_rev(g_media, g_user, g_rating):
 @login_required
 
 def vote_review(request, rating_id, action):
-    if action not in ["up", "down"]:
-        return HttpResponseBadRequest("Invalid action")
-
+    
     rating = get_object_or_404(Rating, id=rating_id)
     user = request.user
 
@@ -168,7 +166,7 @@ def delete_review(request, review_id):
     
    
        if review.user != request.user:
-         raise Http404("You do not have permission to delete this review.")
+         return HttpResponse("You do not have permission to delete this review.")
     
    
        review.delete()

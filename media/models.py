@@ -67,8 +67,7 @@ class Hanekawa(models.Model):
     rating = models.ForeignKey(Rating, on_delete=models.CASCADE)
     vote_type = models.CharField(max_length=4, choices=RATE_CHOICES)
 
-    class Meta:
-        unique_together = ('user', 'rating')   
+   
 
 ####
 #Abrar
