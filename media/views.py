@@ -102,7 +102,7 @@ def add_rev(g_media, g_user, g_rating):
 
 #Kuro#####
 
-@require_POST   
+  
 @login_required
 
 def vote_review(request, rating_id, action):
